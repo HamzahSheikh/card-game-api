@@ -1,5 +1,6 @@
 package com.project.cardgame;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,6 +88,11 @@ public class Game {
 
     public List<Card> getPlayerHand(int playerNumber) {
         return players.get(playerNumber).getHand();
+    }
+
+    public List<Player> getPlayersValue() {
+        // return a list of players sorted by value of hand
+        return players.values().stream().sorted(Comparator.comparing(Player::getValueOfHand).reversed()).toList();
     }
 
 }

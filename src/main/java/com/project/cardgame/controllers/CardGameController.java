@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.cardgame.Deck;
 import com.project.cardgame.Game;
+import com.project.cardgame.ResponseHandler;
 import com.project.cardgame.services.GameService;
 
 @RestController
@@ -69,6 +71,26 @@ public class CardGameController {
     @PostMapping("/add/deck")
     public ResponseEntity<Object> addDeck() {
         return gameService.addDeck();
+    }
+
+    /**
+     * Add a player to the game
+     * 
+     * @return 200 OK if the player was added, 400 BAD REQUEST if no game exists
+     */
+    @PostMapping("/game/add/player")
+    public ResponseEntity<Object> addPlayer() {
+        return gameService.addPlayer();   
+    }
+
+    /**
+     * Remove a player from the game
+     * 
+     * @return 200 OK if the player was removed, 400 BAD REQUEST if no game exists, 400 BAD REQUEST if the player does not exist
+     */
+    @PostMapping("/game/remove/player/{playerNumber}")
+    public ResponseEntity<Object> removePlayer(@PathVariable int playerNumber) {
+        return gameService.removePlayer(playerNumber);   
     }
 
 }

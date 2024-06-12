@@ -76,4 +76,30 @@ public class GameService {
         return new ResponseEntity<>(game.getGameDeck(), HttpStatus.OK);
     }
 
+    public ResponseEntity<Object> addPlayer() {
+
+        if (game == null) {
+            return ResponseHandler.noGamEntity();
+        }
+
+        game.addPlayer();
+
+        return ResponseHandler.responseBuilder("Player " + game.getPlayerCount() + " added!", game.getPlayerCount(), HttpStatus.OK);
+    }
+
+    public ResponseEntity<Object> removePlayer(int playerNumber) {
+
+        if (game == null) {
+            return ResponseHandler.noGamEntity();
+        }
+
+        if (!game.getPlayers().containsKey(playerNumber)) {
+            return ResponseHandler.playerMissingEntity();
+        }
+
+        game.removePlayer(playerNumber);
+
+        return ResponseHandler.responseBuilder("Player " + playerNumber + " removed!", game.getPlayers().size(), HttpStatus.OK);
+    }
+
 }

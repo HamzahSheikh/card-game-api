@@ -3,6 +3,7 @@ package com.project.cardgame.controllers;
 
 import java.util.Stack;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,12 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.cardgame.Deck;
 import com.project.cardgame.Game;
+import com.project.cardgame.services.GameService;
 
 @RestController
 public class CardGameController {
 
-    private Game game;
-    private Stack<Deck> reserveDecks = new Stack<>();
+    
+
+    @Autowired
+    GameService gameService;
 
 
     // Test endpoint
@@ -34,14 +38,7 @@ public class CardGameController {
      */
     @PostMapping(value = "/create/game")
     public ResponseEntity<Object> createGame() {
-
-        if (game != null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        game = Game.getInstance();
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return gameService.createGame();
     }
 
     /**
@@ -51,15 +48,7 @@ public class CardGameController {
      */
     @PostMapping("/delete/game")
     public ResponseEntity<Object> deleteGame() {
-
-        if (game == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        Game.deleteInstance();
-        game = null;
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return gameService.deleteGame();
     }
 
     /**
@@ -69,11 +58,7 @@ public class CardGameController {
      */
     @PostMapping("/create/deck")
     public ResponseEntity<Object> createDeck() {
-
-        Deck deck = new Deck();
-        reserveDecks.push(deck);
-
-        return new ResponseEntity<>(reserveDecks.size(), HttpStatus.OK);
+        return gameService.createDeck();
     }
 
     /**
@@ -83,18 +68,7 @@ public class CardGameController {
      */
     @PostMapping("/add/deck")
     public ResponseEntity<Object> addDeck() {
-
-        if (game == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        if (reserveDecks.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        game.addDeck(reserveDecks.pop());
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return gameService.addDeck();
     }
 
     /**
@@ -106,16 +80,7 @@ public class CardGameController {
      */
     @GetMapping("/get/game-deck")
     public ResponseEntity<Object> getGameDeck() {
-
-        if (game == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        if (game.getGameDeck() == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        return new ResponseEntity<>(game.getGameDeck(), HttpStatus.OK);
+        return gameService.getGameDeck();
     }
 
 

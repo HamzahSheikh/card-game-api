@@ -28,5 +28,21 @@ public class Deck {
     public void mergeDecks(Deck deck) {
         this.cards.addAll(deck.getCards());
     }
+
+    public void shuffle() {
+        // Shuffle deck by iterating through the deck and swapping each card to a random index
+        for (int i = 0; i < cards.size(); i++) {
+            int randomIndex = (int) (Math.random() * cards.size());
+            Card temp = cards.get(i);
+            cards.set(i, cards.get(randomIndex));
+            cards.set(randomIndex, temp);
+        }
+    }
+
+    public Card dealCard() {
+        // Remove the last card from the deck to ensure O(1) time complexity
+        Card card = cards.remove(cards.size() - 1);
+        return card;
+    }
   
 }

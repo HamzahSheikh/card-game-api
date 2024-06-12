@@ -71,17 +71,4 @@ public class CardGameController {
         return gameService.addDeck();
     }
 
-    /**
-     * This is a test endpoint to validate the game deck
-     * 
-     * Get the game deck
-     * 
-     * @return 200 OK if the deck was returned, 400 BAD REQUEST if no game exists, 400 BAD REQUEST if no deck exists
-     */
-    @GetMapping("/get/game-deck")
-    public ResponseEntity<Object> getGameDeck() {
-        return gameService.getGameDeck();
-    }
-
-
 }

@@ -4,11 +4,13 @@ import java.util.Stack;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.project.cardgame.Deck;
 import com.project.cardgame.Game;
 import com.project.cardgame.ResponseHandler;
 
+@Service
 public class GameService {
 
     private Game game;
@@ -58,7 +60,7 @@ public class GameService {
 
         game.addDeck(reserveDecks.pop());
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseHandler.responseBuilder("Success! Deck added to game!", game.getGameDeck(), HttpStatus.OK);
     }
 
     public ResponseEntity<Object> getGameDeck() {

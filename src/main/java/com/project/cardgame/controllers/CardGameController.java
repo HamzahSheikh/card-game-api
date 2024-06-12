@@ -5,6 +5,7 @@ import java.util.Stack;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -74,5 +75,48 @@ public class CardGameController {
 
         return new ResponseEntity<>(reserveDecks.size(), HttpStatus.OK);
     }
+
+    /**
+     * Add a deck to the game deck
+     * 
+     * @return 200 OK if the deck was added, 400 BAD REQUEST if no game exists, 400 BAD REQUEST if no reserve deck exists
+     */
+    @PostMapping("/add/deck")
+    public ResponseEntity<Object> addDeck() {
+
+        if (game == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        if (reserveDecks.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        game.addDeck(reserveDecks.pop());
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     * This is a test endpoint to validate the game deck
+     * 
+     * Get the game deck
+     * 
+     * @return 200 OK if the deck was returned, 400 BAD REQUEST if no game exists, 400 BAD REQUEST if no deck exists
+     */
+    @GetMapping("/get/game-deck")
+    public ResponseEntity<Object> getGameDeck() {
+
+        if (game == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        if (game.getGameDeck() == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(game.getGameDeck(), HttpStatus.OK);
+    }
+
 
 }

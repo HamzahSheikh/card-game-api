@@ -1,7 +1,9 @@
-package com.project.cardgame;
+package com.project.cardgame.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.project.cardgame.entity.card.Card;
 
 public class Player {
 

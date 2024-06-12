@@ -1,4 +1,4 @@
-package com.project.cardgame;
+package com.project.cardgame.entity.card;
 
 public class Card {
 
@@ -14,16 +14,8 @@ public class Card {
         return suit;
     }
 
-    public void setSuit(CardSuit suit) {
-        this.suit = suit;
-    }
-
     public CardValue getValue() {
         return value;
-    }
-
-    public void setValue(CardValue value) {
-        this.value = value;
     }
 
     //This will be used to print the card in the format "Value of Suit"

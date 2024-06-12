@@ -1,4 +1,4 @@
-package com.project.cardgame;
+package com.project.cardgame.entity.card;
 
 public enum CardSuit {
 
@@ -15,10 +15,6 @@ public enum CardSuit {
 
     public String getSuit() {
         return suit;
-    }
-
-    public void setSuit(String suit) {
-        this.suit = suit;
     }
     
 }

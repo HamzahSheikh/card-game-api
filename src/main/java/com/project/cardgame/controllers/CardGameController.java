@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.cardgame.Deck;
-import com.project.cardgame.Game;
 import com.project.cardgame.ResponseHandler;
+import com.project.cardgame.entity.Deck;
+import com.project.cardgame.entity.Game;
 import com.project.cardgame.services.GameService;
 
 @RestController

@@ -1,14 +1,18 @@
 package com.project.cardgame.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.project.cardgame.Deck;
-import com.project.cardgame.Game;
 import com.project.cardgame.ResponseHandler;
+import com.project.cardgame.entity.Deck;
+import com.project.cardgame.entity.Game;
 
 @Service
 public class GameService {
@@ -16,13 +20,19 @@ public class GameService {
     private Game game;
     private Stack<Deck> reserveDecks = new Stack<>();
 
+    @Autowired
+    private ApplicationEventPublisher publisher;
+
     public ResponseEntity<Object> createGame() {
 
         if (game != null) {
+            publisher.publishEvent(ResponseHandler.gameExistsEntity());
             return ResponseHandler.gameExistsEntity();
         }
 
         game = Game.getInstance();
+
+        publisher.publishEvent(ResponseHandler.responseBuilder("Success! Game created!", HttpStatus.OK));
 
         return ResponseHandler.responseBuilder("Success! Game created!", HttpStatus.OK);
     }

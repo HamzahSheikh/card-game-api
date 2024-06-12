@@ -1,4 +1,4 @@
-package com.project.cardgame;
+package com.project.cardgame.entity.card;
 
 public enum CardValue {
 

@@ -1,9 +1,11 @@
-package com.project.cardgame;
+package com.project.cardgame.entity;
 
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.project.cardgame.entity.card.Card;
 
 //Singleton class to represent the game
 public class Game {

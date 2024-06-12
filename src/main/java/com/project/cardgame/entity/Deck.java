@@ -1,9 +1,13 @@
-package com.project.cardgame;
+package com.project.cardgame.entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.project.cardgame.entity.card.Card;
+import com.project.cardgame.entity.card.CardSuit;
+import com.project.cardgame.entity.card.CardValue;
 
 public class Deck {
 

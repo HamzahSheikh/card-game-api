@@ -1,18 +1,22 @@
 package com.project.cardgame.controllers;
 
 
+import java.util.Stack;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.cardgame.Deck;
 import com.project.cardgame.Game;
 
 @RestController
 public class CardGameController {
 
     private Game game;
+    private Stack<Deck> reserveDecks = new Stack<>();
 
 
     // Test endpoint
@@ -55,6 +59,20 @@ public class CardGameController {
         game = null;
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     * Create a new deck and add it to the stack of reserve decks
+     * 
+     * @return 200 OK if the deck was created, 400 BAD REQUEST if no game exists
+     */
+    @PostMapping("/create/deck")
+    public ResponseEntity<Object> createDeck() {
+
+        Deck deck = new Deck();
+        reserveDecks.push(deck);
+
+        return new ResponseEntity<>(reserveDecks.size(), HttpStatus.OK);
     }
 
 }

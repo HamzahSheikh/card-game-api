@@ -1,10 +1,15 @@
 package com.project.cardgame;
 
+import java.util.HashMap;
+import java.util.Map;
+
 //Singleton class to represent the game
 public class Game {
 
     private static Game instance = null;
     private Deck gameDeck;
+    private Map<Integer, Player> players = new HashMap<>();
+    private int playerCount = 0;
 
     /**
      * Singleton method to create or get the instance of the game
@@ -13,9 +18,9 @@ public class Game {
      * 
      */
     public static Game getInstance() {
-        if (instance == null) 
+        if (instance == null)
             instance = new Game();
-        
+
         return instance;
     }
 
@@ -25,7 +30,7 @@ public class Game {
     }
 
     private Game() {
-        
+
     }
 
     public Deck getGameDeck() {
@@ -45,6 +50,23 @@ public class Game {
         }
 
         gameDeck.mergeDecks(deck);
+    }
+
+    public int getPlayerCount() {
+        return playerCount;
+    }
+
+    public Map<Integer, Player> getPlayers() {
+        return players;
+    }
+
+    public void addPlayer() {
+        playerCount++;
+        players.put(playerCount, new Player("Player " + playerCount));
+    }
+
+    public void removePlayer(int playerNumber) {
+        players.remove(playerNumber);
     }
 
 }

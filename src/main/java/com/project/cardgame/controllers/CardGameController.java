@@ -1,6 +1,5 @@
 package com.project.cardgame.controllers;
 
-
 import java.util.Stack;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +19,8 @@ import com.project.cardgame.services.GameService;
 @RestController
 public class CardGameController {
 
-    
-
     @Autowired
     GameService gameService;
-
 
     // Test endpoint
     @RequestMapping("/test")
@@ -36,7 +32,9 @@ public class CardGameController {
     /**
      * Create a new game if one does not already exist
      * 
-     * @return 200 OK if the game was created, 400 BAD REQUEST if a game already exists
+     * @return 200 OK if the game was created, 
+     *         400 BAD REQUEST if a game already exists
+     *         
      */
     @PostMapping(value = "/create/game")
     public ResponseEntity<Object> createGame() {
@@ -46,7 +44,8 @@ public class CardGameController {
     /**
      * Delete the game if one exists
      * 
-     * @return 200 OK if the game was deleted, 400 BAD REQUEST if no game exists
+     * @return 200 OK if the game was deleted, 
+     *         400 BAD REQUEST if no game exists
      */
     @PostMapping("/delete/game")
     public ResponseEntity<Object> deleteGame() {
@@ -56,7 +55,8 @@ public class CardGameController {
     /**
      * Create a new deck and add it to the stack of reserve decks
      * 
-     * @return 200 OK if the deck was created, 400 BAD REQUEST if no game exists
+     * @return 200 OK if the deck was created, 
+     *         400 BAD REQUEST if no game exists
      */
     @PostMapping("/create/deck")
     public ResponseEntity<Object> createDeck() {
@@ -66,7 +66,9 @@ public class CardGameController {
     /**
      * Add a deck to the game deck
      * 
-     * @return 200 OK if the deck was added, 400 BAD REQUEST if no game exists, 400 BAD REQUEST if no reserve deck exists
+     * @return 200 OK if the deck was added, 
+     *         400 BAD REQUEST if no game exists, 
+     *         400 BAD REQUEST if no reserve deck exists     
      */
     @PostMapping("/add/deck")
     public ResponseEntity<Object> addDeck() {
@@ -76,41 +78,61 @@ public class CardGameController {
     /**
      * Add a player to the game
      * 
-     * @return 200 OK if the player was added, 400 BAD REQUEST if no game exists
+     * @return 200 OK if the player was added, 
+     *         400 BAD REQUEST if no game exists
      */
-    @PostMapping("/game/add/player")
+    @PostMapping("/game/add/players")
     public ResponseEntity<Object> addPlayer() {
-        return gameService.addPlayer();   
+        return gameService.addPlayer();
     }
 
     /**
      * Remove a player from the game
      * 
-     * @return 200 OK if the player was removed, 400 BAD REQUEST if no game exists, 400 BAD REQUEST if the player does not exist
+     * @return 200 OK if the player was removed, 
+     *         400 BAD REQUEST if no game exists,
+     *         400 BAD REQUEST if the player does not exist
      */
-    @PostMapping("/game/remove/player/{playerNumber}")
+    @PostMapping("/game/remove/players/{playerNumber}")
     public ResponseEntity<Object> removePlayer(@PathVariable int playerNumber) {
-        return gameService.removePlayer(playerNumber);   
+        return gameService.removePlayer(playerNumber);
     }
 
     /**
      * Deal a card to a player
      * 
-     * @return 200 OK if the card was dealt, 400 BAD REQUEST if no game exists, 400 BAD REQUEST if the player does not exist, 400 BAD REQUEST if no Game Deck
+     * @return 200 OK if the card was dealt, 
+     *         400 BAD REQUEST if no game exists, 
+     *         400 BAD REQUEST if the player does not exist, 
+     *         400 BAD REQUEST if no Game Deck
      */
     @PostMapping("/game/deck/deal/{playerNumber}/{numberOfCards}")
     public ResponseEntity<Object> dealCard(@PathVariable int playerNumber, @PathVariable int numberOfCards) {
-        return gameService.dealCard(playerNumber, numberOfCards);   
+        return gameService.dealCard(playerNumber, numberOfCards);
     }
 
     /**
      * Get a player's hand
      * 
-     * @return 200 OK if the player's hand was retrieved, 400 BAD REQUEST if no game exists, 400 BAD REQUEST if the player does not exist
+     * @return 200 OK if the player's hand was retrieved, 
+     *         400 BAD REQUEST if no game exists, 
+     *         400 BAD REQUEST if the player does not exist
      */
-    @GetMapping("/game/hand/player/{playerNumber}")
+    @GetMapping("/game/hand/players/{playerNumber}")
     public ResponseEntity<Object> getPlayerHand(@PathVariable int playerNumber) {
-        return gameService.getPlayerHand(playerNumber);   
+        return gameService.getPlayerHand(playerNumber);
+    }
+
+    /**
+     * Get all players in the game and their hands value
+     * 
+     * @return 200 OK if the players were retrieved, 
+     *         400 BAD REQUEST if no game, 
+     *         400 BAD REQUEST if no players
+     */
+    @GetMapping("game/players/all/value")
+    public ResponseEntity<Object> getPlayersValue() {
+        return gameService.getPlayersValue();
     }
 
 }

@@ -46,5 +46,9 @@ public class ResponseHandler {
     public static ResponseEntity<Object> playerMissingEntity() {
         return responseBuilder("Player Does Not Exist!", HttpStatus.BAD_REQUEST);
     }
+
+    public static ResponseEntity<Object> noPlayer() {
+        return responseBuilder("No Player in Game!", HttpStatus.BAD_REQUEST);
+    }
  
 }

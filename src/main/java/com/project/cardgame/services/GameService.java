@@ -133,4 +133,16 @@ public class GameService {
             return ResponseHandler.responseBuilder("Player " + playerNumber + "\'s hand, Total: " + game.getPlayers().get(playerNumber).getHand().size() + " Cards", game.getPlayers().get(playerNumber).getHand(), HttpStatus.OK);
     }
 
+    public ResponseEntity<Object> getPlayersValue() {
+        if (game == null) {
+            return ResponseHandler.noGamEntity();
+        }
+
+        if (game.getPlayers().size() == 0) {
+            return ResponseHandler.noPlayer(); 
+        }
+
+        return ResponseHandler.responseBuilder("Players Value!", game.getPlayersValue(), HttpStatus.OK);
+    }
+
 }

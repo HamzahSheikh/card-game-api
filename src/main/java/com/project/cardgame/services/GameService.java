@@ -145,4 +145,18 @@ public class GameService {
         return ResponseHandler.responseBuilder("Players Value!", game.getPlayersValue(), HttpStatus.OK);
     }
 
+    public ResponseEntity<Object> getSuitCount() {
+        if (game == null) {
+            return ResponseHandler.noGamEntity();
+        }
+
+        if (game.getGameDeck() == null) {
+            return ResponseHandler.noGameDeckEntity();
+        }
+
+        return ResponseHandler.responseBuilder("Suit Count!", game.getGameDeck().getSuitCount(), HttpStatus.OK);
+    }
+
+
+
 }

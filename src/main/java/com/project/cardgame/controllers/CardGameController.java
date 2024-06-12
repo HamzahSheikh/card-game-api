@@ -135,4 +135,16 @@ public class CardGameController {
         return gameService.getPlayersValue();
     }
 
+    /**
+     * Get suit count of the deck
+     * 
+     * @return 200 OK if the suit count was retrieved,
+     *         400 BAD REQUEST if no game,
+     *         400 BAD REQUEST if no deck
+     */
+    @GetMapping("/game/deck/count/suit")
+    public ResponseEntity<Object> getSuitCount() {
+       return gameService.getSuitCount();
+    }
+
 }

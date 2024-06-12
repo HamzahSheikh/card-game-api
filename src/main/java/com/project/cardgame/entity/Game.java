@@ -4,6 +4,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import com.project.cardgame.entity.card.Card;
 
@@ -14,7 +16,13 @@ public class Game {
     private Deck gameDeck;
     private Map<Integer, Player> players = new HashMap<>();
     
-    // Count to keep track of the number of players during addition and removal of players
+    private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+    private Lock readLock = lock.readLock();
+    private Lock writeLock = lock.writeLock();
+
+
+    // Count to keep track of the number of players during addition and removal of
+    // players
     private int playerCount = 0;
 
     /**
@@ -24,15 +32,22 @@ public class Game {
      * 
      */
     public static Game getInstance() {
-        if (instance == null)
-            instance = new Game();
+        if (instance == null) {
+            synchronized (Game.class) {
+                if (instance == null) {
+                    instance = new Game();
+                }
+            }
+        }
 
         return instance;
     }
 
     // Delete the instance of the game
     public static void deleteInstance() {
-        instance = null;
+        synchronized (Game.class) {
+            instance = null;
+        }
     }
 
     private Game() {
@@ -40,61 +55,117 @@ public class Game {
     }
 
     public Deck getGameDeck() {
-        return gameDeck;
+        readLock.lock();
+        try {
+            return gameDeck;
+        } finally {
+            readLock.unlock();
+        }
     }
 
     public void setGameDeck(Deck gameDeck) {
-        this.gameDeck = gameDeck;
+        writeLock.lock();
+        try {
+            this.gameDeck = gameDeck;
+        } finally {
+            writeLock.unlock();
+        }
     }
 
     public void addDeck(Deck deck) {
 
-        // If there is no game deck, set the game deck to the deck
-        if (gameDeck == null) {
-            gameDeck = deck;
-            return;
-        }
+        writeLock.lock();
+        try {
+            // If there is no game deck, set the game deck to the deck
+            if (gameDeck == null) {
+                gameDeck = deck;
+                return;
+            }
 
-        gameDeck.mergeDecks(deck);
+            gameDeck.mergeDecks(deck);
+        } finally {
+            writeLock.unlock();
+        }
     }
 
     public int getPlayerCount() {
-        return playerCount;
-    }
-
-    public Map<Integer, Player> getPlayers() {
-        return players;
-    }
-
-    public void addPlayer() {
-        playerCount++;
-        players.put(playerCount, new Player("Player " + playerCount));
-    }
-
-    public void removePlayer(int playerNumber) {
-        players.remove(playerNumber);
-    }
-
-    public void dealCard(int playerNumber, int numberOfCards) {
-        Player player = players.get(playerNumber);
-
-        gameDeck.shuffle();
-
-        int deckSize = gameDeck.getCards().size();
-
-        // Deal the smaller of the deck size and the number of cards requested
-        for (int i = 0; i < Math.min(deckSize, numberOfCards); i++) {
-            player.addToHand(gameDeck.dealCard());
+        readLock.lock();
+        try {
+            return playerCount;
+        } finally {
+            readLock.unlock();
         }
     }
 
+    public Map<Integer, Player> getPlayers() {
+
+        readLock.lock();
+        try {
+            return players;
+        } finally {
+            readLock.unlock();
+        }
+    }
+
+    public void addPlayer() {
+
+        writeLock.lock();
+        try {
+            playerCount++;
+            players.put(playerCount, new Player("Player " + playerCount));
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    public void removePlayer(int playerNumber) {
+
+        writeLock.lock();
+        try {
+            players.remove(playerNumber);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    public void dealCard(int playerNumber, int numberOfCards) {
+
+        writeLock.lock();
+        try {
+            Player player = players.get(playerNumber);
+
+            gameDeck.shuffle();
+
+            int deckSize = gameDeck.getCards().size();
+
+            // Deal the smaller of the deck size and the number of cards requested
+            for (int i = 0; i < Math.min(deckSize, numberOfCards); i++) {
+                player.addToHand(gameDeck.dealCard());
+            }
+        } finally {
+            writeLock.unlock();
+        }
+
+    }
+
     public List<Card> getPlayerHand(int playerNumber) {
-        return players.get(playerNumber).getHand();
+        readLock.lock();
+        try {
+            return players.get(playerNumber).getHand();
+        } finally {
+            readLock.unlock();
+        }
     }
 
     public List<Player> getPlayersValue() {
-        // return a list of players sorted by value of hand
-        return players.values().stream().sorted(Comparator.comparing(Player::getValueOfHand).reversed()).toList();
-    }
 
+        readLock.lock();
+        try {
+            // return a list of players sorted by value of hand
+            return players.values().stream().sorted(Comparator.comparing(Player::getValueOfHand).reversed()).toList();
+        } finally {
+            readLock.unlock();
+        }
+        
+    }
 }

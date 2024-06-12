@@ -93,4 +93,24 @@ public class CardGameController {
         return gameService.removePlayer(playerNumber);   
     }
 
+    /**
+     * Deal a card to a player
+     * 
+     * @return 200 OK if the card was dealt, 400 BAD REQUEST if no game exists, 400 BAD REQUEST if the player does not exist, 400 BAD REQUEST if no Game Deck
+     */
+    @PostMapping("/game/deck/deal/{playerNumber}/{numberOfCards}")
+    public ResponseEntity<Object> dealCard(@PathVariable int playerNumber, @PathVariable int numberOfCards) {
+        return gameService.dealCard(playerNumber, numberOfCards);   
+    }
+
+    /**
+     * Get a player's hand
+     * 
+     * @return 200 OK if the player's hand was retrieved, 400 BAD REQUEST if no game exists, 400 BAD REQUEST if the player does not exist
+     */
+    @GetMapping("/game/hand/player/{playerNumber}")
+    public ResponseEntity<Object> getPlayerHand(@PathVariable int playerNumber) {
+        return gameService.getPlayerHand(playerNumber);   
+    }
+
 }

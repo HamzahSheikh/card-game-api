@@ -102,4 +102,35 @@ public class GameService {
         return ResponseHandler.responseBuilder("Player " + playerNumber + " removed!", game.getPlayers().size(), HttpStatus.OK);
     }
 
+    public ResponseEntity<Object> dealCard(int playerNumber, int numberOfCards) {
+
+        if (game == null) {
+            return ResponseHandler.noGamEntity();
+        }
+
+        if (!game.getPlayers().containsKey(playerNumber)) {
+            return ResponseHandler.playerMissingEntity();
+        }
+
+        if (game.getGameDeck() == null) {
+            return ResponseHandler.noGameDeckEntity();
+        }
+
+        game.dealCard(playerNumber, numberOfCards);
+
+        return ResponseHandler.responseBuilder("Card dealt!", game.getPlayers().get(playerNumber), HttpStatus.OK);
+    }
+
+    public ResponseEntity<Object> getPlayerHand(int playerNumber) {  
+            if (game == null) {
+                return ResponseHandler.noGamEntity();
+            }
+    
+            if (!game.getPlayers().containsKey(playerNumber)) {
+                return ResponseHandler.playerMissingEntity();
+            }
+    
+            return ResponseHandler.responseBuilder("Player " + playerNumber + "\'s hand, Total: " + game.getPlayers().get(playerNumber).getHand().size() + " Cards", game.getPlayers().get(playerNumber).getHand(), HttpStatus.OK);
+    }
+
 }

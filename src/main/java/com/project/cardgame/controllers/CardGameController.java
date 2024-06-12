@@ -39,4 +39,22 @@ public class CardGameController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * Delete the game if one exists
+     * 
+     * @return 200 OK if the game was deleted, 400 BAD REQUEST if no game exists
+     */
+    @PostMapping("/delete/game")
+    public ResponseEntity<Object> deleteGame() {
+
+        if (game == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        Game.deleteInstance();
+        game = null;
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

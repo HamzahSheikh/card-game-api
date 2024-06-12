@@ -1,6 +1,7 @@
 package com.project.cardgame;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 //Singleton class to represent the game
@@ -9,6 +10,8 @@ public class Game {
     private static Game instance = null;
     private Deck gameDeck;
     private Map<Integer, Player> players = new HashMap<>();
+    
+    // Count to keep track of the number of players during addition and removal of players
     private int playerCount = 0;
 
     /**
@@ -67,6 +70,23 @@ public class Game {
 
     public void removePlayer(int playerNumber) {
         players.remove(playerNumber);
+    }
+
+    public void dealCard(int playerNumber, int numberOfCards) {
+        Player player = players.get(playerNumber);
+
+        gameDeck.shuffle();
+
+        int deckSize = gameDeck.getCards().size();
+
+        // Deal the smaller of the deck size and the number of cards requested
+        for (int i = 0; i < Math.min(deckSize, numberOfCards); i++) {
+            player.addToHand(gameDeck.dealCard());
+        }
+    }
+
+    public List<Card> getPlayerHand(int playerNumber) {
+        return players.get(playerNumber).getHand();
     }
 
 }

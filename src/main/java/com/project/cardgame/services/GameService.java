@@ -43,7 +43,7 @@ public class GameService {
 
         game = Game.getInstance();
 
-        response = ResponseHandler.responseBuilder("Success! Game created!", HttpStatus.OK);
+        response = ResponseHandler.responseBuilder("Success! Game created!", HttpStatus.CREATED);
         publisher.publishEvent(new Event(EventType.GAME_EVENT, action, response));
 
         return response;
@@ -79,7 +79,7 @@ public class GameService {
 
         String message = "Success! Deck Created! Total Reserve Decks: " + reserveDecks.size() + ";";
 
-        response = ResponseHandler.responseBuilder(message, reserveDecks.size(), HttpStatus.OK);
+        response = ResponseHandler.responseBuilder(message, reserveDecks.size(), HttpStatus.CREATED);
         publisher.publishEvent(new Event(EventType.DECK_EVENT, action, response));
 
         return response;
@@ -160,7 +160,7 @@ public class GameService {
         game.addPlayer();
 
         response = ResponseHandler.responseBuilder("Player " + game.getPlayerCount() + " added!", game.getPlayerCount(),
-                HttpStatus.OK);
+                HttpStatus.CREATED);
 
         publisher.publishEvent(new Event(EventType.GAME_EVENT, action, response));
         publisher.publishEvent(new Event(EventType.PLAYER_EVENT, action, response));

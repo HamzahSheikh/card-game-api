@@ -9,7 +9,7 @@ public enum CardSuit {
 
     private String suit;
 
-    CardSuit(String suit) {
+    private CardSuit(String suit) {
         this.suit = suit;
     }
 

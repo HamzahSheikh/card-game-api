@@ -9,15 +9,19 @@ Only one game can run at a time, thus it was implemented as a singleton
 # Project Setup
 This is a Maven project, as such an installation of Maven would be required to package into a runnable JAR.
 
-### 1. Redirect into the project root 
+### 1. Clone this Repository
+
+  ```git clone https://github.com/HamzahSheikh/goto-cardsgame.git```
+
+### 2. Redirect into the project root 
 
   ```cd .../goto-cardsgame```
   
-### 2. Run Maven package
+### 3. Run Maven package
 
   ```mvn package```
 
-### 3. Run the .jar file found in the target folder
+### 4. Run the .jar file found in the target folder
 
   ```java -jar target/cardgame-0.0.1-SNAPSHOT.jar```
 

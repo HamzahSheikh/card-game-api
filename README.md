@@ -1,6 +1,6 @@
 # ♠️♥️♦️♣️ Card Game Take Home Project ♠️♥️♦️♣️
 
-A simple REST API service that is used to play a simple game of cards. It was created in Java using the Spring Boot library.
+Built using Spring Boot, this REST API service facilitates a straightforward card game, handling deck dealing, player creation, and more.
 
 ### Assumptions
 Only one game can run at a time, thus it was implemented as a singleton

@@ -1,4 +1,4 @@
-# Card Game Take Home Project
+# ♠️♥️♦️♣️ Card Game Take Home Project ♠️♥️♦️♣️
 
 A simple REST API service that is used to play a simple game of cards. It was created in Java using the Spring Boot library.
 
@@ -529,6 +529,9 @@ Get a chronological log of the player events
     "status": 200
 }
 ```
+
+# Test Coverage
+![image](https://github.com/HamzahSheikh/goto-cardsgame/assets/57862914/9514c023-3e64-40c4-8da0-9337c5f65aa6)
 
 
 

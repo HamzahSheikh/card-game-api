@@ -21,6 +21,10 @@ This is a Maven project, as such an installation of Maven would be required to p
 
   ```java -jar target/cardgame-0.0.1-SNAPSHOT.jar```
 
+### Alternative
+
+A pre-compiled JAR file of the application can be found under Releases: https://github.com/HamzahSheikh/goto-cardsgame/releases/tag/JAR
+
 
 # REST API Documentation for Card Game
 

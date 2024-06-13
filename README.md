@@ -318,20 +318,50 @@ Get all players in the game and their hand value
 {
     "data": [
         {
-            "name": "Player 1",
-            "hand": [],
-            "valueOfHand": 3
+            "name": "Player 2",
+            "hand": [
+                {
+                    "suit": "CLUBS",
+                    "value": "SEVEN"
+                },
+                {
+                    "suit": "DIAMONDS",
+                    "value": "SEVEN"
+                },
+                {
+                    "suit": "SPADES",
+                    "value": "SIX"
+                },
+                {
+                    "suit": "CLUBS",
+                    "value": "TEN"
+                },
+                {
+                    "suit": "CLUBS",
+                    "value": "FIVE"
+                }
+            ],
+            "valueOfHand": 35
         },
         {
             "name": "Player 3",
-            "hand": [],
-            "valueOfHand": 4
+            "hand": [
+                {
+                    "suit": "SPADES",
+                    "value": "TEN"
+                },
+                {
+                    "suit": "DIAMONDS",
+                    "value": "NINE"
+                },
+                {
+                    "suit": "DIAMONDS",
+                    "value": "TWO"
+                }
+            ],
+            "valueOfHand": 21
         },
-        {
-            "name": "Player 4",
-            "hand": [],
-            "valueOfHand": 14
-        }
+         ...
     ],
     "message": "Players Value!",
     "status": 200

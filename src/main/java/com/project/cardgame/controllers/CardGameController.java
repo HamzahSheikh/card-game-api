@@ -143,8 +143,38 @@ public class CardGameController {
      *         400 BAD REQUEST if no deck
      */
     @GetMapping("/game/deck/count/suit")
-    public ResponseEntity<Object> getSuitCount() {
-       return gameService.getSuitCount();
+    public ResponseEntity<Object> getDeckSuitCount() {
+       return gameService.getDeckSuitCount();
+    }
+
+    /**
+     * Get event log of the game
+     * 
+     * @return 200 OK if the event log was retrieved,
+     */
+    @GetMapping("/event/game/log")
+    public ResponseEntity<Object> getGameEventLog() {
+        return gameService.getGameEventLog();
+    }
+
+    /**
+     * Get event log of the player
+     * 
+     * @return 200 OK if the event log was retrieved,
+     */
+    @GetMapping("/event/player/log")
+    public ResponseEntity<Object> getPlayerEventLog() {
+        return gameService.getPlayerEventLog();
+    }
+
+    /**
+     * Get event log of the deck
+     * 
+     * @return 200 OK if the event log was retrieved,
+     */
+    @GetMapping("/event/deck/log")
+    public ResponseEntity<Object> getDeckEventLog() {
+        return gameService.getDeckEventLog();
     }
 
 }

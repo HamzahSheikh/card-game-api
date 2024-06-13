@@ -42,8 +42,8 @@ public class ResponseHandler {
         return responseBuilder("No reserve deck created!", HttpStatus.BAD_REQUEST);
     }
 
-    public static ResponseEntity<Object> playerMissingEntity() {
-        return responseBuilder("Player Does Not Exist!", HttpStatus.BAD_REQUEST);
+    public static ResponseEntity<Object> playerMissingEntity(int player) {
+        return responseBuilder("Player " + player + " Does Not Exist!", HttpStatus.BAD_REQUEST);
     }
 
     public static ResponseEntity<Object> noPlayer() {

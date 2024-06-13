@@ -12,17 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.cardgame.services.GameService;
 
 @RestController
+@RequestMapping("/api/v1")
 public class CardGameController {
 
     @Autowired
     GameService gameService;
-
-    // Test endpoint
-    @RequestMapping("/test")
-    public String test() {
-
-        return "This is the Card Game REST API! Hello World!";
-    }
 
     /**
      * Create a new game if one does not already exist
@@ -71,7 +65,7 @@ public class CardGameController {
     }
 
     /**
-     * Create adnd Add a player to the game
+     * Create and Add a player to the game
      * 
      * @return 201 CREATED if the player was added, 
      *         400 BAD REQUEST if no game exists
@@ -125,7 +119,7 @@ public class CardGameController {
      *         400 BAD REQUEST if no game, 
      *         400 BAD REQUEST if no players
      */
-    @GetMapping("game/players/all/value")
+    @GetMapping("/game/players/all/value")
     public ResponseEntity<Object> getPlayersValue() {
         return gameService.getPlayersValue();
     }

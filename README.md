@@ -2,6 +2,10 @@
 
 A simple REST API service that is used to play a simple game of cards. It was created in Java using the Spring Boot library.
 
+### Assumptions
+Only one game can run at a time, thus it was implemented as a singleton
+
+
 # Project Setup
 This is a Maven project, as such an installation of Maven would be required to package into a runnable JAR.
 

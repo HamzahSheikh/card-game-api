@@ -11,11 +11,11 @@ This is a Maven project, as such an installation of Maven would be required to p
 
 ### 1. Clone this Repository
 
-  ```git clone https://github.com/HamzahSheikh/goto-cardsgame.git```
+  ```git clone https://github.com/HamzahSheikh/card-game-api.git```
 
 ### 2. Redirect into the project root 
 
-  ```cd .../goto-cardsgame```
+  ```cd .../card-game-api```
   
 ### 3. Run Maven package
 

@@ -27,7 +27,7 @@ This is a Maven project, as such an installation of Maven would be required to p
 
 ### Alternative
 
-A pre-compiled JAR file of the application can be found under Releases: https://github.com/HamzahSheikh/goto-cardsgame/releases/tag/JAR
+A pre-compiled JAR file of the application can be found under Releases: https://github.com/HamzahSheikh/card-game-api/releases/tag/JAR
 
 
 # REST API Documentation for Card Game
